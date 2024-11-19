@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="helloworld" class="org.practice.spring.helloworld.HelloWorld">
+
+    </bean>
+    <bean id="student" class="org.practice.spring.ioc_xml.Student">
+        <property name="id" value="1">
+        </property>
+        <property name="age" value="23"></property>
+        <property name="gender" value="Man"></property>
+        <property name="name" value="Wang"></property>
+    </bean>
+    <bean id="studentConstructor" class="org.practice.spring.ioc_xml.Student">
+        <constructor-arg value="1002"></constructor-arg>
+        <constructor-arg value="Yeh"></constructor-arg>
+        <constructor-arg value="Woman"></constructor-arg>
+        <constructor-arg value="32"></constructor-arg>
+    </bean>
+
+    <bean id="studentConstructorSpecificValue" class="org.practice.spring.ioc_xml.Student">
+        <constructor-arg value="1002" name="id"></constructor-arg>
+        <constructor-arg value="Chen"></constructor-arg>
+        <constructor-arg value="Man"></constructor-arg>
+        <constructor-arg value="70" name="age"></constructor-arg>
+    </bean>
+
+    <bean id="studentWithClass" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" ref="beanClass"></property>
+    </bean>
+
+    <bean id="beanClass" class="org.practice.spring.ioc_xml.Clazz">
+        <property name="cid" value="1"></property>
+        <property name="cname" value="17"></property>
+    </bean>
+
+    <bean id="studentWithClassOne" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" ref="beanClass"></property>
+        <property name="clazz.cid" value="5"></property> <!--need instance class advance -->
+        <property name="clazz.cname" value="elephant"></property>
+    </bean>
+
+    <bean id="studentWithClassTwo" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" >
+            <bean id="clazzInner" class="org.practice.spring.ioc_xml.Clazz">
+                <property name="cname" value="apple"></property>
+                <property name="cid" value="2"></property>
+            </bean>
+        </property>
+    </bean>
+</beans>
