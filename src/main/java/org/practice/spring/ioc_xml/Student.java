@@ -1,5 +1,8 @@
 package org.practice.spring.ioc_xml;
 
+import java.util.Arrays;
+import java.util.Map;
+
 public class Student {
 
     private int id;
@@ -7,7 +10,9 @@ public class Student {
     private String gender;
     private int age;
     private double score;
+    private String[] hobbies;
     private Clazz clazz;
+    private Map<String, Teacher> teacherMap;
 
     public Student() {
     }
@@ -78,6 +83,22 @@ public class Student {
         this.score = score;
     }
 
+    public String[] getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public Map<String, Teacher> getTeacherMap() {
+        return teacherMap;
+    }
+
+    public void setTeacherMap(Map<String, Teacher> teacherMap) {
+        this.teacherMap = teacherMap;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -86,7 +107,9 @@ public class Student {
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
                 ", score=" + score +
+                ", hobbies=" + Arrays.toString(hobbies) +
                 ", clazz=" + clazz +
+                ", teacherMap=" + teacherMap +
                 '}';
     }
 }
