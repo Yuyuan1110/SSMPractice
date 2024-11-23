@@ -1,4 +1,4 @@
-package org.practice.spring.test;
+package org.practice.spring.test.xml;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.junit.jupiter.api.Test;

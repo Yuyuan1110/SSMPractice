@@ -1,4 +1,4 @@
-package org.practice.spring.test;
+package org.practice.spring.test.xml;
 
 import org.junit.jupiter.api.Test;
 import org.practice.spring.ioc_xml.controller.StudentController;

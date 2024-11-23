@@ -1,8 +1,7 @@
-package org.practice.spring.test;
+package org.practice.spring.test.xml;
 
 import org.junit.jupiter.api.Test;
 import org.practice.spring.ioc_xml.BeanLife;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
