@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首頁</title>
+</head>
+<body>
+<h1>Hello spring MVC</h1>
+<a th:href="@{/hello}">hello link</a>
+<a th:href="@{/rest/root/1}">placeholder</a>
+<hr>
+<!--<form th:action="@{/param/servletAPI}" method="post">-->
+<!--<form th:action="@{/param}" method="post">-->
+<form th:action="@{/getUser}" method="post">
+    用戶名：<input type="text" name="username"></input><br>
+    密碼：<input type="password" name="password"></input><br>
+    <input type="submit" value="登錄"></input><br>
+</form>
+
+<a th:href="@{/mav}">test model and view</a><br>
+<a th:href="@{/model}">test model</a><br>
+<a th:href="@{/modelmap}">test model map</a><br>
+<a th:href="@{/map}">test map</a><br>
+<hr>
+
+<a th:href="@{/view/thymeleaf}">test view of Spring mvc, Thymeleaf.</a><br></br>
+<a th:href="@{/view/forward}">test view of Spring mvc, InternalResourceView.</a><br></br>
+<a th:href="@{/view/redirect}">test view of Spring mvc, RedirectView.</a><br></br>
+<a th:href="@{/user}">Test Restful, search all Users.</a><br></br>
+<a th:href="@{/user/1}">Test Restful, search User by id.</a><br></br>
+<form th:action="@{/user}" method="post">
+    用戶名：<input type="text" name="username"></input><br>
+    密碼：<input type="password" name="password"></input><br>
+    <input type="submit" value="註冊"></input><br>
+</form>
+
+<form th:action="@{/user}" method="post">
+    <input type="hidden" name="_method" value="PUT"><br>
+    <input type="submit" value="update"></input><br>
+</form>
+<form th:action="@{/user/1}" method="post">
+    <input type="hidden" name="_method" value="DELETE"><br>
+    <input type="submit" value="delete"></input><br>
+</form>
+<hr>
+<a th:href="@{/employee}">查詢所有員工</a>
+
+
+</body>
+</html>

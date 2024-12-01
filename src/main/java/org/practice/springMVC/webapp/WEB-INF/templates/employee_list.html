@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>employee list</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th colspan="5">employee list</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>Name</td>
+        <td>email</td>
+        <td>gender</td>
+        <td>options (<a th:href="@{/to/add}">add</a>)</td>
+    </tr>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.gender}"></td>
+        <td>
+            <a th:href="@{'/employee/'+${employee.id}}" onclick="deleteEmployee(event)">delete</a>
+            <a th:href="@{'/employee/'+${employee.id}}">update</a>
+        </td>
+    </tr>
+</table>
+<form method="post">
+    <input type="hidden" name="_method" value="DELETE"><br>
+</form>
+<script th:inline="javascript">
+    function deleteEmployee(event) {
+        event.preventDefault(); // 阻止默认链接跳转
+
+        // 找到 form 元素
+        var form = document.getElementsByTagName('form')[0];
+
+        // 修改 form 的 action 属性
+        form.action = event.target.href;
+
+        // 提交表单
+        form.submit();
+    }
+</script>
+</body>
+</html>
