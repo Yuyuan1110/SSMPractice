@@ -31,7 +31,7 @@ public class EmployeeController {
     @PostMapping("/employee")
     public String addEmployee(Employee employee) {
         employeeDao.save(employee);
-        return "redirect:/employee";
+        return "redirect:/employee"; 
     }
 
     @GetMapping("employee/{id}")

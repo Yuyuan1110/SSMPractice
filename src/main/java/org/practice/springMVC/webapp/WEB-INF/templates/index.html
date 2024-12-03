@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>首頁</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
 <h1>Hello spring MVC</h1>
+<a th:href="@{/upload/and/download}">Cloud</a><br>
 <a th:href="@{/hello}">hello link</a>
 <a th:href="@{/rest/root/1}">placeholder</a>
 <hr>
@@ -44,7 +47,37 @@
 </form>
 <hr>
 <a th:href="@{/employee}">查詢所有員工</a>
+<hr>
+<input type="button" value="測試spring mvc處理ajax" id="ajaxTestButton">
+<input type="button" value="測試spring mvc處理ajax" id="ajaxTestButton2"><br>
+<a th:href="@{response/body}">Test Response Body.</a><br>
+<input type="button" value="測試spring mvc處理ajax" id="responseBody"><br>
 
 
+<script th:inline="javascript">
+    const ajaxTestButton = document.getElementById("ajaxTestButton2");
+    ajaxTestButton.addEventListener("click", function () {
+        // axios({
+        //    url:"",
+        //     method:"",
+        //     params:{}, value=name, combined to url, no matter to get or post
+        //     data:{} json, request parameter will send to server through request header
+        // }).then(response => {
+        //     console.log(response.data);
+        // });
+
+        // axios.post("/spring/mvc/ajax",{id:"1001", username:"chen", password:"12341234"})
+        //     .then(response => {
+        //         console.log(response.data);
+        // });
+    });
+    const  responseBody = document.getElementById("responseBody");
+    responseBody.addEventListener("click", function (){
+        axios.get("/spring/mvc/response/body")
+            .then(response => {
+                console.log(response.data);
+            });
+    })
+</script>
 </body>
 </html>

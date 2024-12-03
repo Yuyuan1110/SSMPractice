@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>cloud test</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+<a th:href="@{/cloud/download}">下載測試</a>
+<form th:action="@{/cloud/upload}" method="post" enctype="multipart/form-data">
+    圖片: <input type="file" name="file"><br>
+    <input type="submit" value="Upload">  </input>
+</form>
+</body>
+</html>
