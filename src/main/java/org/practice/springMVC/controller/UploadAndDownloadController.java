@@ -10,6 +10,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,7 @@ public class UploadAndDownloadController {
 
     @Autowired
     private ResourceLoader resourceLoader;
+
     @GetMapping("/cloud/download")
     public ResponseEntity<Resource> testDownload() throws IOException {
         Resource file = resourceLoader.getResource("/img/1.jpg");
@@ -53,9 +55,25 @@ public class UploadAndDownloadController {
     }
 
     @PostMapping("/cloud/upload")
-    public String testUpload(@RequestParam("file") MultipartFile file) {
-        String filename = file.getOriginalFilename();
-        System.out.println(filename);
+    public String testUpload(@RequestParam("file") MultipartFile file, Model model) {
+        if (file.isEmpty()) {
+            model.addAttribute("message", "Please select a file");
+            return "upload_and_download.html";
+        }
+        try {
+            String fileName = file.getOriginalFilename();
+            Resource uploadDirResource = resourceLoader.getResource("/photo/");
+            File uploadDir = uploadDirResource.getFile();
+            if(!uploadDir.exists()){
+                uploadDir.mkdir();
+            }
+            String realPath = uploadDir.getAbsolutePath() + File.separator + file.getOriginalFilename();
+            file.transferTo(new File(realPath));
+
+            model.addAttribute("message", "文件上传成功!");
+        } catch (IOException e) {
+            model.addAttribute("message", "文件上传失败: " + e.getMessage());
+        }
         return "success";
     }
 }

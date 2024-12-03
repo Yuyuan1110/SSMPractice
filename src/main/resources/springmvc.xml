@@ -28,5 +28,5 @@
     <mvc:annotation-driven />
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
     <mvc:view-controller path="/to/add" view-name="employee_add"></mvc:view-controller>
-
+<!--<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>-->
 </beans>
