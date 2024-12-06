@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AutowireByXMLTEST {
     @Test
     public void testAutowireByXML() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("spring-autowire.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("old/spring-autowire.xml");
         StudentController bean = ioc.getBean(StudentController.class);
         bean.saveStudent();
     }

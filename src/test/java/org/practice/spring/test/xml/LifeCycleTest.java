@@ -11,7 +11,7 @@ public class LifeCycleTest {
     public void testLifeCycle() {
 //        ApplicationContext ioc = new ClassPathXmlApplicationContext("classpath:spring-lifecycle.xml");
 //        ioc container close function need to call the subinterface "ConfigurableApplicationContext" or else of ApplicationContext.
-        ConfigurableApplicationContext ioc = new ClassPathXmlApplicationContext("classpath:spring-lifecycle.xml");
+        ConfigurableApplicationContext ioc = new ClassPathXmlApplicationContext("classpath:old/spring-lifecycle.xml");
         BeanLife bean = ioc.getBean(BeanLife.class);
         System.out.println(bean);
         ioc.close();

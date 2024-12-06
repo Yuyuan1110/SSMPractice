@@ -1,7 +1,6 @@
 package org.practice.spring.test.anno;
 
 import org.junit.jupiter.api.Test;
-import org.practice.spring.ioc_annotation.controller.UserController;
 import org.practice.spring.ioc_annotation.controller.impl.UserControllerImpl;
 import org.practice.spring.ioc_annotation.dao.UserDao;
 import org.practice.spring.ioc_annotation.service.UserService;
@@ -11,7 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class IOCByAnnotationTest {
     @Test
     public void test() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("spring-ioc-annotation.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("old/spring-ioc-annotation.xml");
 //      default ID is lower letter of class name
         UserControllerImpl bean = ioc.getBean("userControllerImpl", UserControllerImpl.class);
         System.out.println(bean);

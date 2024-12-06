@@ -9,7 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
 
-@SpringJUnitConfig(locations = "classpath:spring-jdbc.xml")
+@SpringJUnitConfig(locations = "classpath:old/spring-jdbc.xml")
 public class JdbcTemplateTest {
 
 

@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class factoryBeanTest {
     @Test
     public void testFactoryBean() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("spring-factory.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("old/spring-factory.xml");
         Student bean = ioc.getBean(Student.class);
         System.out.println(bean);
     }

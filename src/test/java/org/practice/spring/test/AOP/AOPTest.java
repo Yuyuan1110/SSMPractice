@@ -9,7 +9,7 @@ public class AOPTest {
 
     @Test
     public void testAOPByAnnotation() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("aop-annotation.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("old/aop-annotation.xml");
         Calculator bean = ioc.getBean(Calculator.class);
         bean.add(1,1);
         bean.mul(2,10);
@@ -18,7 +18,7 @@ public class AOPTest {
     }
     @Test
     public void testAOPByXML() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("aop-xml.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("old/aop-xml.xml");
         Calculator bean = ioc.getBean(Calculator.class);
         bean.add(1,1);
         bean.mul(2,10);

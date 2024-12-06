@@ -9,7 +9,7 @@ public class HelloWorldTest {
 
     @Test
     public void testHelloWorld() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("classpath:old/applicationContext.xml");
         HelloWorld bean = ioc.getBean(HelloWorld.class);
         bean.sayHello();
     }

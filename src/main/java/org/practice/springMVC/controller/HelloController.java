@@ -24,4 +24,11 @@ public class HelloController {
 
         return "success";
     }
+
+    @RequestMapping("/test/exception")
+    public String testException(){
+        int a = 1/0;
+        System.out.println("error: 1/0"+ a);
+        return "success";
+    }
 }

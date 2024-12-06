@@ -5,7 +5,7 @@ import org.practice.spring.transaction.controller.BookController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@SpringJUnitConfig(locations = "classpath:spring-jdbc.xml")
+@SpringJUnitConfig(locations = "classpath:old/spring-jdbc.xml")
 public class BookTxTest {
     @Autowired
     private BookController bookController;
