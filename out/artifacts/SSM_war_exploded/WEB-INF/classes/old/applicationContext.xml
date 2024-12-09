@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="helloworld" class="org.practice.spring.helloworld.HelloWorld">
+
+    </bean>
+    <bean id="student" class="org.practice.spring.ioc_xml.Student">
+        <property name="id" value="1">
+        </property>
+        <property name="age" value="23"></property>
+        <property name="gender" value="Man"></property>
+        <property name="name" value="Wang"></property>
+    </bean>
+    <bean id="studentConstructor" class="org.practice.spring.ioc_xml.Student">
+        <constructor-arg value="1002"></constructor-arg>
+        <constructor-arg value="Yeh"></constructor-arg>
+        <constructor-arg value="Woman"></constructor-arg>
+        <constructor-arg value="32"></constructor-arg>
+    </bean>
+
+    <bean id="studentConstructorSpecificValue" class="org.practice.spring.ioc_xml.Student">
+        <constructor-arg value="1002" name="id"></constructor-arg>
+        <constructor-arg value="Chen"></constructor-arg>
+        <constructor-arg value="Man"></constructor-arg>
+        <constructor-arg value="70" name="age"></constructor-arg>
+    </bean>
+
+    <bean id="studentWithClass" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" ref="beanClass"></property>
+    </bean>
+
+    <bean id="beanClass" class="org.practice.spring.ioc_xml.Clazz">
+        <property name="cid" value="1"></property>
+        <property name="cname" value="17"></property>
+    </bean>
+
+    <bean id="studentWithClassOne" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" ref="beanClass"></property>
+        <property name="clazz.cid" value="5"></property> <!--need instance class advance -->
+        <property name="clazz.cname" value="elephant"></property>
+    </bean>
+
+    <bean id="studentWithClassTwo" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" >
+            <bean id="clazzInner" class="org.practice.spring.ioc_xml.Clazz">
+<!--                the bean of Inner, can use in current bean label, cannot get it via IOC container-->
+                <property name="cname" value="apple"></property>
+                <property name="cid" value="2"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="studentWithArray" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" >
+            <bean id="clazzInner" class="org.practice.spring.ioc_xml.Clazz">
+<!--                the bean of Inner, can use in current bean label, cannot get it via IOC container-->
+                <property name="cname" value="apple"></property>
+                <property name="cid" value="2"></property>
+            </bean>
+        </property>
+        <property name="hobbies">
+            <array>
+                <value>play computer</value>
+                <value>play baseball</value>
+                <value>smoke</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="clazzWithList" class="org.practice.spring.ioc_xml.Clazz">
+        <property name="cname" value="apple"></property>
+        <property name="cid" value="2"></property>
+        <property name="studentList">
+            <list>
+                <ref bean="student"></ref>
+                <ref bean="studentConstructor"></ref>
+                <ref bean="studentConstructorSpecificValue"></ref>
+                <ref bean="studentWithClass"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="clazzWithUtilList" class="org.practice.spring.ioc_xml.Clazz">
+        <property name="cname" value="apple"></property>
+        <property name="cid" value="2"></property>
+        <property name="studentList" ref="studentList"></property>
+    </bean>
+
+    <util:list id="studentList">
+        <ref bean="student"></ref>
+        <ref bean="studentWithClassTwo"></ref>
+        <ref bean="studentWithClassOne"></ref>
+    </util:list>
+
+    <bean id="studentWithMap" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" ref="beanClass"></property>
+        <property name="hobbies">
+            <array>
+                <value>test</value>
+                <value>fight</value>
+            </array>
+        </property>
+        <property name="teacherMap">
+            <map>
+                <entry key="10010" value-ref="teacherOne"></entry>
+                <entry key="20020" value-ref="teacherTwo"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="teacherOne" class="org.practice.spring.ioc_xml.Teacher">
+        <property name="tid" value="10010"></property>
+        <property name="tname" value="Mr.Sansam"></property>
+    </bean>
+
+    <bean id="teacherTwo" class="org.practice.spring.ioc_xml.Teacher">
+        <property name="tid" value="20020"></property>
+        <property name="tname" value="Mr.Toto"></property>
+    </bean>
+
+    <bean id="studentWithUtilMap" class="org.practice.spring.ioc_xml.Student">
+        <property name="name" value="Wang"></property>
+        <property name="gender" value="Man"></property>
+        <property name="id" value="3"></property>
+        <property name="age" value="18"></property>
+        <property name="score" value="100"></property>
+        <property name="clazz" ref="beanClass"></property>
+        <property name="hobbies">
+            <array>
+                <value>test</value>
+                <value>fight</value>
+            </array>
+        </property>
+        <property name="teacherMap" ref="teacherMap">
+        </property>
+    </bean>
+
+    <util:map id="teacherMap">
+        <entry key="20020" value-ref="teacherTwo"></entry>
+        <entry key="10010" value-ref="teacherOne"></entry>
+    </util:map>
+
+    <bean id="studentPLabel" class="org.practice.spring.ioc_xml.Student"
+          p:id="1001" p:name="小明" p:teacherMap-ref="teacherMap"></bean>
+
+</beans>

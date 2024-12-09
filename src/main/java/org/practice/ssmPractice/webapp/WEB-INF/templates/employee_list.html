@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All employee</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Employee list</th>
+    </tr>
+    <tr>
+        <th>item</th>
+        <th>name</th>
+        <th>age</th>
+        <th>gender</th>
+        <th>email</th>
+    </tr>
+    <tr th:each="employee, status : ${list}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${employee.empName}"></td>
+        <td th:text="${employee.age}"></td>
+        <td th:text="${employee.gender}"></td>
+        <td th:text="${employee.email}"></td>
+        <td>
+            <a href="">modify</a>
+            <a href="">delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
