@@ -2,10 +2,15 @@ package org.practice.ssmPractice.conifg;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -14,27 +19,27 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = {"org.practice.ssmPractice"}, excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Controller.class}))
-@PropertySource("classpath:jdbc.properties")
+@ComponentScan(basePackages = {"org.practice.ssmPractice"})
 @EnableTransactionManagement
-public class SpringConfig {
+//@Import(JDBCConfig.class)
+@PropertySource("classpath:jdbc.properties")
+public class SpringConfig implements EnvironmentAware {
 
-    @Value("${jdbc.driver}") String driverClassName;
-    @Value("${jdbc.url}") String url;
-    @Value("${jdbc.username}") String username;
-    @Value("${jdbc.password}") String password;
+
+    private Environment env;
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.env = environment;
+    }
 
     @Bean
     public DataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
-        System.out.println("connecting datasource, driver: " + driverClassName);
-        dataSource.setDriverClassName(driverClassName);
-        System.out.println("connecting datasource, url: " + url);
-        dataSource.setUrl(url);
-        System.out.println("connecting datasource, username: " + username);
-        dataSource.setUsername(username);
-        System.out.println("connecting datasource, password: " + password);
-        dataSource.setPassword(password);
+        dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
+        dataSource.setUrl(env.getProperty("jdbc.url"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
         return dataSource;
     }
 
@@ -48,20 +53,13 @@ public class SpringConfig {
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        // sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         sqlSessionFactoryBean.setDataSource(dataSource());
         sqlSessionFactoryBean.setTypeAliasesPackage("org.practice.ssmPractice.pojo");
-        // sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
-
-        // 设置 MyBatis 配置属性
-        Properties properties = new Properties();
-        properties.setProperty("mapUnderscoreToCamelCase", "true");
-//        Map<String, Object> configurationProperties = new HashMap<>();
-//        configurationProperties.put("mapUnderscoreToCamelCase", true);
-        sqlSessionFactoryBean.setConfigurationProperties(properties);
-
-        // 添加分页插件
         sqlSessionFactoryBean.setPlugins(new PageInterceptor());
+
+        sqlSessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+
         return sqlSessionFactoryBean;
     }
 

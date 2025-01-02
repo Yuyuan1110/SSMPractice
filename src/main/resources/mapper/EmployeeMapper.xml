@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="org.practice.ssmPractice.mapper.EmployeeMapper">
     <select id="getAllEmployee" resultType="Employee">
         select * from t_emp
     </select>
+    <select id="getEmployeeById" resultType="Employee">
+        select * from t_emp where emp_id = #{empId}
+    </select>
+    <update id="updateEmployee" parameterType="java.lang.Integer">
+        UPDATE t_emp
+        <set>
+            <if test="empId != null">
+                emp_id = #{empId},
+            </if>
+            <if test="empName != null">
+                emp_name = #{empName},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="age != null and age >= 0">
+                age = #{age},
+            </if>
+            <if test="email != null">
+                email = #{email}
+            </if>
+        </set>
+        WHERE emp_id = #{empId}
+    </update>
+
+    <delete id="deleteEmployee" parameterType="java.lang.Integer">
+        DELETE FROM t_emp WHERE emp_id = #{empId}
+    </delete>
+
+    <insert id="addEmployee" parameterType="Employee">
+        INSERT INTO t_emp (emp_id, emp_name, age, gender, email)
+        VALUES (NULL, #{empName}, #{age}, #{gender}, #{email})
+    </insert>
 </mapper>

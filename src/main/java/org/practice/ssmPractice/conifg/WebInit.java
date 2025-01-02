@@ -16,6 +16,7 @@ public class WebInit implements WebApplicationInitializer{
         context.register(SpringConfig.class, WebConfig.class);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
+//        ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", dispatcherServlet);
         jakarta.servlet.ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", dispatcherServlet);
         registration.setLoadOnStartup(1);
         registration.addMapping("/");

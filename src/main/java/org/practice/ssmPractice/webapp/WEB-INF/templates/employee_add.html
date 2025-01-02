@@ -2,9 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>add</title>
+    <title>add employee</title>
 </head>
 <body>
-<h1>test add</h1>
+<form th:action="@{/employee/add}" method="post">
+    <table>
+        <tr>
+            <th colspan="2">add employee</th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" name="empName">
+            </td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>
+                <input type="text" name="age">
+            </td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>
+                <input type="text" name="email">
+            </td>
+        </tr>
+        <tr>
+            <td>gender</td>
+            <td>
+                <input type="radio" name="gender" value="F">male</input>
+                <input type="radio" name="gender" value="M">female</input>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="add"></input>
+            </td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

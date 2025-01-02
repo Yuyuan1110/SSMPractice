@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>All employee</title>
@@ -15,18 +15,45 @@
         <th>age</th>
         <th>gender</th>
         <th>email</th>
+        <th>
+            <a th:href="@{'/employee/add'}">ADD Employee</a>
+        </th>
     </tr>
-    <tr th:each="employee, status : ${list}">
+    <tr th:each="employee, status : ${page.list}">
         <td th:text="${status.count}"></td>
         <td th:text="${employee.empName}"></td>
         <td th:text="${employee.age}"></td>
         <td th:text="${employee.gender}"></td>
         <td th:text="${employee.email}"></td>
         <td>
-            <a href="">modify</a>
-            <a href="">delete</a>
+            <a th:href="@{'/employee/update/' + ${employee.empId}}">modify</a>
+            <a th:href="@{'/employee/delete/' + ${employee.empId}}"onclick="deleteEmployee(event)">delete</a>
         </td>
     </tr>
 </table>
+<div>
+    <a th:if="${page.hasPreviousPage}" th:href="@{/employee/page/1}">First page</a>
+    <a th:if="${page.hasPreviousPage}" th:href="@{'/employee/page/' + ${page.prePage}}">Previous Page</a>
+    <span th:each="num : ${page.navigatepageNums}">
+        <a th:if="${page.pageNum == num}" style="color: red" th:href="@{'/employee/page/' + ${num}}" th:text="'[' + ${num } +']'"></a>
+        <a th:if="${page.pageNum != num}" th:href="@{'/employee/page/' + ${num}}" th:text="${num}"></a>
+    </span>
+    <a th:if="${page.hasNextPage}" th:href="@{'/employee/page/' + ${page.nextPage}}">Next Page</a>
+    <a th:if="${page.hasNextPage}" th:href="@{'/employee/page/' + ${page.pages}}">Tail page</a>
+</div>
+<script th:inline="javascript">
+    function deleteEmployee(event){
+        event.preventDefault();
+        const url = event.target.href;
+        // window.alert(url);
+        fetch(url, {
+            method: 'DELETE',
+        }).then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
+        })
+    }
+</script>
 </body>
 </html>
